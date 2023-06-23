@@ -27,25 +27,17 @@
 import Foundation
 import QuartzCore
 import UIKit
-extension String {
-    func localizeString() -> String {
-        let languageType = UserDefaults.standard.string(forKey: "setValueLanguage")
-        let path = Bundle.main.path(forResource: languageType, ofType: "lproj")
-        let bundle = Bundle(path: path!)
-        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
-    }
-}
 
 open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimatorProtocol, ESRefreshImpactProtocol {
-    open var pullToRefreshDescription = NSLocalizedString("Pull to refresh".localizeString(), comment: "") {
+    open var pullToRefreshDescription = NSLocalizedString("Pull to refresh", comment: "") {
         didSet {
             if pullToRefreshDescription != oldValue {
                 titleLabel.text = pullToRefreshDescription;
             }
         }
     }
-    open var releaseToRefreshDescription = NSLocalizedString("Release to refresh".localizeString(), comment: "")
-    open var loadingDescription = NSLocalizedString("Loading...".localizeString(), comment: "")
+    open var releaseToRefreshDescription = NSLocalizedString("Release to refresh", comment: "")
+    open var loadingDescription = NSLocalizedString("Loading...", comment: "")
 
     open var view: UIView { return self }
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
