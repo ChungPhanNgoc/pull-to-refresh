@@ -41,7 +41,7 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     fileprivate let titleLabel: UILabel = {
         let label = UILabel.init(frame: CGRect.zero)
         label.font = UIFont.systemFont(ofSize: 14.0)
-        label.textColor = UIColor.init(white: 160.0 / 255.0, alpha: 1.0)
+        label.textColor = UIColor.while
         label.textAlignment = .center
         return label
     }()
@@ -67,12 +67,14 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         indicatorView.startAnimating()
         titleLabel.text = loadingDescription
         indicatorView.isHidden = false
+        indicatorView.color = .white
     }
     
     open func refreshAnimationEnd(view: ESRefreshComponent) {
         indicatorView.stopAnimating()
         titleLabel.text = loadingMoreDescription
         indicatorView.isHidden = true
+        indicatorView.color = .white
     }
     
     open func refresh(view: ESRefreshComponent, progressDidChange progress: CGFloat) {
