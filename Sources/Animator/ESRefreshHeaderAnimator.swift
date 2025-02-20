@@ -69,7 +69,10 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     }()
     
     fileprivate let indicatorView: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView.init(style: .medium)
+        var indicatorStyle: UIActivityIndicatorView.Style = .white
+        if #available(iOS 13.0, *) {
+            indicatorStyle = .medium
+        }
         indicatorView.color = .white
         indicatorView.isHidden = true
         return indicatorView
