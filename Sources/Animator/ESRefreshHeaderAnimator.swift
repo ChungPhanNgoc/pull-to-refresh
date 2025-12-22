@@ -38,7 +38,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     }
     open var releaseToRefreshDescription = NSLocalizedString("Release to refresh", comment: "")
     open var loadingDescription = NSLocalizedString("Loading...", comment: "")
-
+    open var loadingIndicatorColor: UIColor = UIColor.white
     open var view: UIView { return self }
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var trigger: CGFloat = 60.0
@@ -73,7 +73,6 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
         if #available(iOS 13.0, *) {
             indicatorStyle = .medium
         }
-        indicatorView.color = .white
         indicatorView.isHidden = true
         return indicatorView
     }()
@@ -92,6 +91,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     
     open func refreshAnimationBegin(view: ESRefreshComponent) {
         indicatorView.startAnimating()
+        indicatorView.color = loadingIndicatorColor
         indicatorView.isHidden = false
         imageView.isHidden = true
         titleLabel.text = loadingDescription
@@ -100,6 +100,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
   
     open func refreshAnimationEnd(view: ESRefreshComponent) {
         indicatorView.stopAnimating()
+        indicatorView.color = loadingIndicatorColor
         indicatorView.isHidden = true
         imageView.isHidden = false
         titleLabel.text = pullToRefreshDescription
@@ -116,7 +117,7 @@ open class ESRefreshHeaderAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
             return
         }
         self.state = state
-        
+        indicatorView.color = loadingIndicatorColor
         switch state {
         case .refreshing, .autoRefreshing:
             titleLabel.text = loadingDescription
