@@ -30,7 +30,8 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open var loadingMoreDescription: String = NSLocalizedString("Loading more", comment: "")
     open var noMoreDataDescription: String  = NSLocalizedString("No more data", comment: "")
     open var loadingDescription: String     = NSLocalizedString("Loading...", comment: "")
-
+    open var loadingIndicatorColor: UIColor = UIColor.white
+    
     open var view: UIView { return self }
     open var duration: TimeInterval = 0.3
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
@@ -47,7 +48,7 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     }()
     
     fileprivate let indicatorView: UIActivityIndicatorView = {
-        let indicatorView = UIActivityIndicatorView.init(style: .gray)
+        let indicatorView = UIActivityIndicatorView(style: .medium)
         indicatorView.isHidden = true
         return indicatorView
     }()
@@ -66,12 +67,14 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open func refreshAnimationBegin(view: ESRefreshComponent) {
         indicatorView.startAnimating()
         titleLabel.text = loadingDescription
+        indicatorView.color = loadingIndicatorColor
         indicatorView.isHidden = false
     }
     
     open func refreshAnimationEnd(view: ESRefreshComponent) {
         indicatorView.stopAnimating()
         titleLabel.text = loadingMoreDescription
+        indicatorView.color = loadingIndicatorColor
         indicatorView.isHidden = true
     }
     
@@ -84,7 +87,7 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
             return
         }
         self.state = state
-        
+        indicatorView.color = loadingIndicatorColor
         switch state {
         case .refreshing, .autoRefreshing :
             titleLabel.text = loadingDescription
