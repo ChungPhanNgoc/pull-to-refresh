@@ -67,6 +67,7 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open func refreshAnimationBegin(view: ESRefreshComponent) {
         indicatorView.startAnimating()
         titleLabel.text = loadingDescription
+        titleLabel.isHidden = false
         indicatorView.color = loadingIndicatorColor
         indicatorView.isHidden = false
     }
@@ -74,7 +75,8 @@ open class ESRefreshFooterAnimator: UIView, ESRefreshProtocol, ESRefreshAnimator
     open func refreshAnimationEnd(view: ESRefreshComponent) {
         indicatorView.stopAnimating()
         titleLabel.text = loadingMoreDescription
-        indicatorView.color = loadingIndicatorColor
+        titleLabel.isHidden = true
+        indicatorView.color = self.loadingIndicatorColor
         indicatorView.isHidden = true
     }
     
